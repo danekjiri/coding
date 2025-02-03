@@ -1,0 +1,70 @@
+/* Table styling */
+colgroup .articleName {
+    width: 50%;
+}
+
+colgroup .articleActions {
+    width: 25%;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 1em;
+}
+th {
+    background-color: #f5f5f5;
+}
+th, td {
+    padding: .5em;
+    text-align: left;
+    width: 0%;
+}
+
+a#deleteArticle {
+    color: red;
+    margin-left: 1em;
+}
+
+.actions a {
+    text-decoration: none;
+    color: cornflowerblue;
+    margin-right: .2em;
+}
+
+/* Pagination & creation controls in a row, centered */
+#paginationControls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+#pageInfo {
+    margin: 0 10px;
+}
+
+/* Modal styling */
+.modal {
+    position: fixed;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    width: 70%;
+    margin-left: 14%;
+    background: #fff;
+    padding: 1%;
+    border-radius: 4px;
+    min-width: 320px;
+}
+.buttons {
+    margin-top: 1em;
+    text-align: right;
+}
+.newArticleName {
+    width: 19em;
+    margin: .5em 1em 0 0;
+}

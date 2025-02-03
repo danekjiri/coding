@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1, h2, h3 {
+    margin-top: 0;
+    text-align: left;
+}
+
+/* Centered container with a box look */
+#main {
+    max-width: 800px;
+    margin: 0 auto;
+    border: 2px solid #333;
+    padding: 1em;
+    margin-top: 2em;
+}
+
+button {
+    cursor: pointer;
+    padding: 6px 12px;
+    margin-right: 4px;
+    border: 1px solid #666;
+    background: #eee;
+    color: #222;
+}
+
+button:hover,
+.actions a:hover {
+    background: #e7e4e4;
+}

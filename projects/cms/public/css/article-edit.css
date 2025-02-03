@@ -1,0 +1,29 @@
+#backButton {
+    background-color: red;
+}
+
+#backButton:hover {
+    background-color: rgb(218, 7, 7);
+}
+
+#saveButton {
+    background-color: green;
+    margin-left: 1.2em;
+}
+
+#saveButton:hover {
+    background-color: darkgreen;
+}
+
+.name {
+    margin: 1em;
+    padding-bottom: 1em;
+}
+
+.content {
+    margin: 1em;
+}
+
+#articleName {
+    width: 19em;
+}

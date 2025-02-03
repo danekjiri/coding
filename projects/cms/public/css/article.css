@@ -1,0 +1,12 @@
+#navigations a{
+    text-decoration: none;
+    padding: 2em;
+}
+
+#editButton {
+    background-color: cornflowerblue;
+}
+
+#editButton:hover {
+    background-color: rgb(75, 128, 225);
+}
