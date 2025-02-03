@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <AvaloniaResource Include="Assets\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="11.0.10"/>
+        <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.10" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.0.10"/>
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.10"/>
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.10"/>
+        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.10"/>
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.0" />
+        <PackageReference Include="NBitcoin" Version="7.0.37" />
+        <PackageReference Include="QRCoder-ImageSharp" Version="0.10.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Views\WalletProfile\WalletProfileSendView.axaml.cs">
+        <DependentUpon>WalletProfileSendView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\WalletProfile\WalletProfileReceiveView.axaml.cs">
+        <DependentUpon>WalletProfileReceiveView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\WalletProfile\WalletProfileHomeView.axaml.cs">
+        <DependentUpon>WalletProfileHomeView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\WalletProfile\WalletProfileBaseView.axaml.cs">
+        <DependentUpon>WalletProfileBaseView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\WalletProfile\WalletProfileAddressesView.axaml.cs">
+        <DependentUpon>WalletProfileAddressesView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\ProfileDialog\ValidateSelectedProfileDialogView.axaml.cs">
+        <DependentUpon>ValidateSelectedProfileDialogView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\ProfileDialog\ProfileDialogView.axaml.cs">
+        <DependentUpon>ProfileDialogView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\ProfileDialog\CreateNewProfileDialogView.axaml.cs">
+        <DependentUpon>CreateNewProfileDialogView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+</Project>

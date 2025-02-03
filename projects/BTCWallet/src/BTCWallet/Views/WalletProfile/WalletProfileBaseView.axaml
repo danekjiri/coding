@@ -1,0 +1,47 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:vm="using:BTCWallet.ViewModels"
+             xmlns:m="using:BTCWallet.Models"
+             xmlns:walletProfile="clr-namespace:BTCWallet.ViewModels.WalletProfile"
+             x:Class="BTCWallet.Views.WalletProfile.WalletProfileBaseView"
+             x:DataType="walletProfile:WalletProfileBaseViewModel"
+             Background="LightGray">
+    
+    <SplitView IsPaneOpen="{Binding IsPaneOpen}"
+               OpenPaneLength="160"
+               CompactPaneLength="50"
+               DisplayMode= "CompactInline"
+               PaneBackground="DimGray">
+        <SplitView.Pane>
+            <StackPanel Spacing="10"
+                        Margin="5">
+                <Button Content="-" Command="{Binding TriggerPaneCommand}"/>
+                <ListBox ItemsSource="{Binding WalletProfileMenuItemsList}"
+                         SelectedIndex="{Binding SelectedTabIndex}"
+                         SelectedItem="{Binding SelectedMenuItem}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type m:WalletProfileMenuItem}">
+                            <StackPanel Spacing="10"
+                                        Orientation="Horizontal">
+                                <TextBlock Text="{Binding MenuLabel}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button Content="OPEN WALLET"
+                        Background="Green"
+                        Command="{Binding OpenNewProfileTabCommand}" />
+                <Button Content="CLOSE TAB"
+                        Background="Red"
+                        Command="{Binding CloseCurrentTabCommand}" />
+            </StackPanel>
+        </SplitView.Pane>
+        <SplitView.Content>
+                <TransitioningContentControl Content="{Binding CurrentContent}"></TransitioningContentControl>
+        </SplitView.Content>
+    </SplitView>
+    
+</UserControl>

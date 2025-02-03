@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="/Users/jiridanek/Documents/mff_uk/4_semestr/advanced_csharp/BTCWallet/BTCWallet/BTCWallet/WalletDb.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2646"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,9:mainAddresses"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS &quot;PublicKeys&quot; (
+                                             &quot;PublicKeyID&quot;	INTEGER,
+                                             &quot;PublicKeyWif&quot;	TEXT NOT NULL,
+                                             &quot;PrivateKeyWif&quot;	TEXT,
+                                             &quot;ChainCode&quot;    TEXT NOT NULL,
+                                             &quot;IsCompressed&quot; INTEGER NOT NULL,
+                                             &quot;SequenceNumber&quot;	INTEGER NOT NULL,
+                                             &quot;WalletID&quot;	INTEGER,
+                                             PRIMARY KEY(&quot;PublicKeyID&quot; AUTOINCREMENT),
+    FOREIGN KEY(&quot;WalletID&quot;) REFERENCES &quot;Wallets&quot;(&quot;WalletID&quot;)
+    );
+CREATE TABLE IF NOT EXISTS &quot;Wallets&quot; (
+                                         &quot;WalletID&quot;	INTEGER,
+                                         &quot;Mnemonic&quot;	TEXT,
+                                         &quot;Derivation&quot;	TEXT,
+                                         &quot;MasterKeyWif&quot;	TEXT,
+                                         &quot;Passphrase&quot; TEXT,
+                                         &quot;XPubWif&quot;	TEXT NOT NULL,
+                                         &quot;IsReadOnly&quot; INTEGER NOT NULL,
+                                         PRIMARY KEY(&quot;WalletID&quot; AUTOINCREMENT)
+    );
+CREATE TABLE IF NOT EXISTS &quot;Profiles&quot; (
+                                          &quot;ProfileID&quot;	INTEGER,
+                                          &quot;Username&quot;	TEXT NOT NULL,
+                                          &quot;PasswordHash&quot;	TEXT NOT NULL,
+                                          &quot;LastUnusedAddrIndexRec&quot; INTEGER NOT NULL,
+                                          &quot;LastUnusedAddrIndexChan&quot; INTEGER NOT NULL,
+                                          &quot;WalletID&quot;	INTEGER,
+                                          PRIMARY KEY(&quot;ProfileID&quot; AUTOINCREMENT),
+    FOREIGN KEY(&quot;WalletID&quot;) REFERENCES &quot;Wallets&quot;(&quot;WalletID&quot;)
+    );
+CREATE TABLE IF NOT EXISTS &quot;Addresses&quot; (
+                                           &quot;AddressID&quot;	INTEGER,
+                                           &quot;AddressWif&quot;	TEXT NOT NULL,
+                                           &quot;PublicKeyID&quot; INTEGER,
+                                           &quot;IsChange&quot;	INTEGER NOT NULL,
+                                           &quot;Network&quot;	TEXT NOT NULL,
+                                           PRIMARY KEY(&quot;AddressID&quot; AUTOINCREMENT),
+     FOREIGN KEY(&quot;PublicKeyID&quot;) REFERENCES &quot;PublicKeys&quot;(&quot;PublicKeyID&quot;)
+    );
+CREATE TABLE IF NOT EXISTS &quot;Transactions&quot; (
+                                              &quot;TransactionID&quot;	INTEGER,
+                                              &quot;TxHash&quot;	TEXT NOT NULL,
+                                              &quot;CreatedAt&quot;	TEXT NOT NULL,
+                                              &quot;Comment&quot;	TEXT,
+                                              &quot;IsCreated&quot; INTEGER NOT NULL,
+                                              &quot;BlockHeight&quot; INTEGER,
+                                              &quot;FeeSatoshi&quot;  INTEGER,
+                                              PRIMARY KEY(&quot;TransactionID&quot; AUTOINCREMENT)
+    );
+CREATE TABLE IF NOT EXISTS &quot;Inputs&quot; (
+                                        &quot;InputID&quot;	INTEGER,
+                                        &quot;TransactionID&quot;	INTEGER NOT NULL,
+                                        &quot;InputIndex&quot;	INTEGER NOT NULL,
+                                        &quot;AmountSatoshi&quot;	INTEGER NOT NULL,
+                                        &quot;ScriptSig&quot;	TEXT,
+                                        &quot;PreviousOutTxHash&quot; TEXT NOT NULL,
+                                        &quot;PreviousOutIndex&quot; INTEGER NOT NULL,
+                                        PRIMARY KEY(&quot;InputID&quot; AUTOINCREMENT),
+    FOREIGN KEY(&quot;TransactionID&quot;) REFERENCES &quot;Transactions&quot;(&quot;TransactionID&quot;)
+    );
+CREATE TABLE IF NOT EXISTS &quot;Outputs&quot; (
+                                         &quot;OutputID&quot;	INTEGER,
+                                         &quot;TransactionID&quot;    INTEGER NOT NULL,
+                                         &quot;AddressID&quot;   INTEGER,
+                                         &quot;AddressWif&quot;   TEXT NOT NULL,
+                                         &quot;AmountSatoshi&quot;    INTEGER NOT NULL,
+                                         &quot;OutputIndex&quot;	INTEGER NOT NULL,
+                                         &quot;ScriptPubKey&quot;	TEXT NOT NULL,
+                                         &quot;IsSpent&quot; INTEGER,
+                                         &quot;InputID&quot; INTEGER,
+                                         PRIMARY KEY(&quot;OutputID&quot; AUTOINCREMENT),
+    FOREIGN KEY(&quot;TransactionID&quot;) REFERENCES &quot;Transactions&quot;(&quot;TransactionID&quot;),
+    FOREIGN KEY(&quot;AddressID&quot;) REFERENCES &quot;Addresses&quot;(&quot;AddressID&quot;),
+    FOREIGN KEY(&quot;InputID&quot;) REFERENCES &quot;Inputs&quot;(&quot;InputID&quot;)
+    );</sql><current_tab id="0"/></tab_sql></sqlb_project>

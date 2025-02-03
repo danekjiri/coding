@@ -1,0 +1,93 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BTCWallet.Views.WalletProfile.WalletProfileExportView"
+             xmlns:vm="using:BTCWallet.ViewModels.WalletProfile"
+             xmlns:m="using:BTCWallet.Models"
+             xmlns:walletProfile="clr-namespace:BTCWallet.ViewModels.WalletProfile"
+             x:DataType="walletProfile:WalletProfileExportViewModel"
+             Background="LightGray">
+    
+    <Grid RowDefinitions="Auto, *, Auto, Auto, Auto"
+          Margin="20">
+        <Grid Grid.Row="0"
+              ColumnDefinitions="*, Auto, *">
+        </Grid>
+        <Grid Grid.Row="1"
+              ColumnDefinitions="*,*,*"
+              Margin="0, 5, 0, 10"
+              IsEnabled="{Binding IsSeeded}">
+            <TextBlock Text="Wallet mnemonics:" />
+            <StackPanel Grid.Column="0"
+                        Margin="20">
+                <TextBlock Text="1." />
+                <TextBox IsReadOnly="True"
+                         Text="{Binding WalletMnemonics[0]}" />
+                <TextBlock Text="2."/>
+                <TextBox IsReadOnly="True"
+                         Text="{Binding WalletMnemonics[1]}" />
+                <TextBlock Text="3."/>
+                <TextBox IsReadOnly="True"
+                         Text="{Binding WalletMnemonics[2]}" />
+                <TextBlock Text="4."/>
+                <TextBox IsReadOnly="True"
+                         Text="{Binding WalletMnemonics[3]}" />
+            </StackPanel>
+            <StackPanel Grid.Column="1"
+                        Margin="20">
+                <TextBlock Text="5."/>
+                <TextBox IsReadOnly="True"
+                         Text="{Binding WalletMnemonics[4]}" />
+                <TextBlock Text="6."/>
+                <TextBox IsReadOnly="True"
+                         Text="{Binding WalletMnemonics[5]}" />
+                <TextBlock Text="7."/>
+                <TextBox IsReadOnly="True"
+                         Text="{Binding WalletMnemonics[6]}" />
+                <TextBlock Text="8."/>
+                <TextBox IsReadOnly="True"
+                         Text="{Binding WalletMnemonics[7]}" />
+            </StackPanel>
+            <StackPanel Grid.Column="2"
+                        Margin="20">
+                <TextBlock Text="9."/>
+                <TextBox IsReadOnly="True"
+                         Text="{Binding WalletMnemonics[8]}" />
+                <TextBlock Text="10."/>
+                <TextBox IsReadOnly="True"
+                         Text="{Binding WalletMnemonics[9]}" />
+                <TextBlock Text="11."/>
+                <TextBox IsReadOnly="True"
+                         Text="{Binding WalletMnemonics[10]}" />
+                <TextBlock Text="12."/>
+                <TextBox IsReadOnly="True"
+                         Text="{Binding WalletMnemonics[11]}" />
+            </StackPanel>
+        </Grid>
+        <StackPanel Grid.Row="2"
+                    Spacing="5">
+                <Label Content="Passphrase:" 
+                       Margin="2"/> 
+                <TextBox Text="{Binding WalletPassphrase^, FallbackValue='loading...'}"
+                         IsReadOnly="True"
+                         IsEnabled="{Binding IsWithPassphrase}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3"
+                    Spacing="5">
+            <Label Content="Derivation path:" 
+                   Margin="2"/>
+            <TextBox Text="{Binding WalletDerivationPath^, FallbackValue='loading...'}" 
+                     IsReadOnly="True"
+                     IsEnabled="{Binding IsSeeded}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="4"
+                    Spacing="5">
+            <Label Content="XPub export:"  
+                   Margin="2"/>
+            <TextBox IsReadOnly="True"
+                     Text="{Binding WalletXPub^, FallbackValue='loading...'}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

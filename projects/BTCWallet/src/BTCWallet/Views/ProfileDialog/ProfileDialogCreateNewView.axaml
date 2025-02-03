@@ -1,0 +1,126 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="550"
+             x:Class="BTCWallet.Views.ProfileDialog.ProfileDialogCreateNewView"
+             xmlns:m="using:BTCWallet.DataModels"
+             xmlns:vm="using:BTCWallet.ViewModels"
+             xmlns:profileDialog="clr-namespace:BTCWallet.ViewModels.ProfileDialog"
+             x:DataType="profileDialog:ProfileDialogCreateNewViewModel"
+             Background="DarkGray">
+
+    <Grid RowDefinitions="Auto, *, Auto, Auto, Auto"
+          Margin="20">
+        <Grid Grid.Row="0"
+              ColumnDefinitions="Auto, Auto, *">
+            <StackPanel Grid.Column="0"
+                        Margin="10,0">
+                <TextBlock Text="Check in for import:" />
+                <ToggleSwitch IsChecked="{Binding IsImport}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1"
+                        Margin="10,0"
+                        IsVisible="{Binding IsImport}">
+                <TextBlock Text="Check in for read-only wallet:" />
+                <ToggleSwitch IsChecked="{Binding IsReadOnly}"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1"
+              ColumnDefinitions="*,*,*"
+              Margin="0, 5, 0, 10"
+              IsEnabled="{Binding MnemonicEnabled}">
+            <TextBlock Text="Mnemonic:" />
+            <StackPanel Grid.Column="0"
+                        Margin="20">
+                <TextBlock Text="1." />
+                <TextBox Text="{Binding TypedMnemonics[0]}" />
+                <TextBlock Text="2."/>
+                <TextBox Text="{Binding TypedMnemonics[1]}" />
+                <TextBlock Text="3."/>
+                <TextBox Text="{Binding TypedMnemonics[2]}" />
+                <TextBlock Text="4."/>
+                <TextBox Text="{Binding TypedMnemonics[3]}" />
+                <StackPanel Orientation="Horizontal"
+                            Spacing="10">
+                    <Button Content="CHECK"
+                            Background="Orange"
+                            Focusable="False"
+                            Command="{Binding CheckAndMarkInvalidMnemonicsCommand}"
+                            IsEnabled="{Binding IsImport}"
+                            Margin="0, 10,0, 0"/>
+                    <TextBlock Text="The checksum for given mnemonic is invalid!!"
+                               Background="OrangeRed"
+                               Margin="10, 10, 0, 0"
+                               IsVisible="{Binding IsInvalidChecksum}"
+                               VerticalAlignment="Center" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Column="1"
+                        Margin="20">
+                <TextBlock Text="5."/>
+                <TextBox Text="{Binding TypedMnemonics[4]}" />
+                <TextBlock Text="6."/>
+                <TextBox Text="{Binding TypedMnemonics[5]}" />
+                <TextBlock Text="7."/>
+                <TextBox Text="{Binding TypedMnemonics[6]}" />
+                <TextBlock Text="8."/>
+                <TextBox Text="{Binding TypedMnemonics[7]}" />
+            </StackPanel>
+            <StackPanel Grid.Column="2"
+                        Margin="20">
+                <TextBlock Text="9."/>
+                <TextBox Text="{Binding TypedMnemonics[8]}" />
+                <TextBlock Text="10."/>
+                <TextBox Text="{Binding TypedMnemonics[9]}" />
+                <TextBlock Text="11."/>
+                <TextBox Text="{Binding TypedMnemonics[10]}" />
+                <TextBlock Text="12."/>
+                <TextBox Text="{Binding TypedMnemonics[11]}" />
+            </StackPanel>
+        </Grid>
+        <StackPanel Grid.Row="2"
+                    Spacing="5">
+                <Label Content="derivation:"/>
+                <TextBox Text="{Binding DerivationPath}"
+                         IsEnabled="{Binding DerivationEnabled}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3"
+                    IsVisible="{Binding XPubEnabled}"
+                    Spacing="5">
+            <Label Content="xpub import:" />
+            <TextBox Text="{Binding XPub}" />
+        </StackPanel>
+        <Grid Grid.Row="4"
+              ColumnDefinitions="Auto, *, Auto">
+            <StackPanel Grid.Column="0"
+                        Spacing="5"
+                        Margin="5"
+                        IsEnabled="{Binding PassphraseEnabled}">
+                    <TextBlock Text="Check in for passphrase enabled:" />
+                    <ToggleSwitch IsChecked="{Binding IsWithPassphrase}" />
+            </StackPanel>
+            <StackPanel Grid.Column="1"
+                        Spacing="5"
+                        Margin="5"
+                        IsEnabled="{Binding PassphraseEnabled}"
+                        >
+                <TextBox Text="{Binding Passphrase}"
+                         IsEnabled="{Binding IsWithPassphrase}"
+                         VerticalAlignment="Bottom" />
+            </StackPanel>
+            <StackPanel Grid.Column="2"
+                        Orientation="Horizontal"
+                        Spacing="15"
+                        VerticalAlignment="Bottom"
+                        Margin="5">
+                <Button Content="{Binding CreateOrImportWalletButton}"
+                        Background="YellowGreen"
+                        Command="{Binding CreateOrImportWalletCommand}"/>
+                <Button Content="BACK"
+                        Background="Red"
+                        Command="{Binding BackCommand}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

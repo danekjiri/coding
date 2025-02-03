@@ -1,0 +1,107 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BTCWallet.Views.SendTransactionDialog.SendTransactionDialogView"
+             xmlns:vm="using:BTCWallet.ViewModels"
+             xmlns:m="using:BTCWallet.Models"
+             xmlns:sendTransaction="clr-namespace:BTCWallet.ViewModels.SendTransactionDialog"
+             x:DataType="sendTransaction:SendTransactionDialogViewModel"
+             Background="DarkGray">
+    <Grid RowDefinitions="*, 1.5*, Auto"
+          Margin="20">
+        <Grid Grid.Row="0"
+            ColumnDefinitions="5*, *, 5*">
+            <StackPanel Grid.Row="0" Grid.Column="0">
+                <TextBlock Text="Inputs:" />
+                <DataGrid Margin="15"
+                          ItemsSource="{Binding InputUTXOs}"
+                          MaxHeight="300">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn IsReadOnly="True" FontSize="9" Header="address"  Binding="{Binding AddressWif} "/>
+                        <DataGridTextColumn IsReadOnly="True" FontSize="12" Header="amount (sats)"  Binding="{Binding AmountSatoshi} "/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="2">
+                <TextBlock Text="Outputs:" />
+                <DataGrid Margin="15"
+                          ItemsSource="{Binding OutputUTXOs}"
+                          MaxHeight="300">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn IsReadOnly="True" FontSize="9" Header="address"  Binding="{Binding AddressWif} "/>
+                        <DataGridTextColumn IsReadOnly="True" FontSize="12" Header="amount (sats)"  Binding="{Binding AmountSatoshi} "/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Grid>
+            <StackPanel Grid.Row="1"
+                        VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal"
+                            Spacing="5">
+                    <Label Content="Transaction hash:" />
+                    <Label Content="{Binding TransactionHash}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Spacing="5">
+                    <Label Content="Transaction size:" />
+                    <Label Content="{Binding TransactionSize}" />
+                    <Label Content="bytes" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Spacing="5">
+                    <Label Content="Transaction fee:" />
+                    <Label Content="{Binding Fee}" />
+                    <Label Content="sats" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Spacing="5">
+                    <Label Content="Transaction total amount:" />
+                    <Label Content="{Binding TransactionTotalValue}" />
+                    <Label Content="sats" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Spacing="5">
+                    <Label Content="TxHex:" />
+                    <ScrollViewer Width="700"
+                                  Height="100"
+                                  HorizontalAlignment="Center">
+                        <TextBox Text="{Binding TransactionHex}"
+                                   LineHeight="20"
+                                   Margin="5"
+                                   TextWrapping="Wrap"
+                                   IsReadOnly="True" />
+                    </ScrollViewer>
+                </StackPanel>
+            </StackPanel>
+            <Grid Grid.Row="2">
+                <Grid ColumnDefinitions="*, Auto">
+                    <StackPanel Grid.Column="1"
+                                Margin="5"
+                                Spacing="5"
+                                Orientation="Horizontal">
+                        <Label Content="{Binding LoadingError}"
+                               IsVisible="{Binding IsError}"
+                               Background="Red"
+                               VerticalAlignment="Center"/>
+                        <Label Content="Transaction has been successfully broadcasted."
+                               IsVisible="{Binding IsBroadcasted}"
+                               Background="Green"
+                               VerticalAlignment="Center"/>
+                        <Button  
+                            Content="BROADCAST TX"
+                            HotKey="b"
+                            Background="YellowGreen"
+                            Command="{Binding BroadcastTxCommand}"
+                        />
+                        <Button Content="CANCEL"
+                                HotKey="c"
+                                Background="Red"
+                                Command="{Binding CancelCommand}"
+                        />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+</UserControl>

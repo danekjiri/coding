@@ -1,0 +1,147 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BTCWallet.Views.WalletProfile.WalletProfileSendView"
+             xmlns:vm="using:BTCWallet.ViewModels"
+             xmlns:m="using:BTCWallet.Models"
+             xmlns:walletProfile="clr-namespace:BTCWallet.ViewModels.WalletProfile"
+             x:DataType="walletProfile:WalletProfileSendViewModel"
+             Background="LightGray">
+    <Grid RowDefinitions="Auto, *, Auto, 3*"
+             Margin="20">
+              
+         <Grid Grid.Row="0"
+                    ColumnDefinitions="1.5*, 4*, 0.2*, Auto"
+                    RowDefinitions="*, *, *, *, *, *, *"
+                    Margin="5">
+             <Label Grid.Row="0" Grid.Column="0"
+                         Margin="5"
+                         Content="Pay to:" 
+                         VerticalAlignment="Center"/>
+                  <TextBox Grid.Row="0" Grid.Column="1"
+                             Margin="5"
+                             Text="{Binding PayToAddress}" />
+                  <Label Grid.Row="1" Grid.Column="0" 
+                         Margin="5"
+                         Content="Comment:" 
+                         VerticalAlignment="Center"/>
+                  <TextBox Grid.Row="1" Grid.Column="1"
+                           Margin="5"
+                           Text="{Binding Comment}" />
+                  <Label Grid.Row="2" Grid.Column="0"
+                         Margin="5"
+                         Content="Amount:"  
+                         VerticalAlignment="Center"/>
+                  <TextBox Grid.Row="2" Grid.Column="1"
+                           Margin="5"
+                           Text="{Binding Amount}" />
+                  <Label Grid.Row="3" Grid.Column="0" 
+                         Margin="5"
+                         VerticalAlignment="Center"
+                         Content="Fee:" />
+                  <TextBox Grid.Row="3" Grid.Column="1" 
+                             Text="{Binding Fee}" 
+                             Margin="5"
+                             VerticalAlignment="Center" />
+                  <Grid Grid.Row="4" Grid.Column="0" ColumnSpan="2"
+                        ColumnDefinitions="*, *"
+                        RowDefinitions="*, *, *"
+                        Margin="2">
+                      <Label Grid.Row="0" Grid.Column="0"
+                             FontSize="8"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Right"
+                             Content="Fee hint 10m:" />
+                      <Label Grid.Row="1" Grid.Column="0"
+                             FontSize="8"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Right"
+                             Content="Fee hint 60m:" />
+                      <Label Grid.Row="2" Grid.Column="0"
+                             FontSize="8"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Right"
+                             Content="Fee hint 24h:" />
+                      <TextBlock Grid.Row="0" Grid.Column="1" 
+                                 Text="{Binding FeeHint30m}" 
+                                 TextAlignment="Center"
+                                 FontSize="9"
+                                 FontWeight="Bold"
+                                 Background="LimeGreen"
+                                 VerticalAlignment="Center" />
+                      <TextBlock Grid.Row="1" Grid.Column="1" 
+                                 Text="{Binding FeeHint60m}" 
+                                 TextAlignment="Center"
+                                 FontSize="9"
+                                 FontWeight="Bold"
+                                 Background="DarkOrange"
+                                 VerticalAlignment="Center" />
+                      <TextBlock Grid.Row="2" Grid.Column="1" 
+                                 Text="{Binding FeeHint24h}" 
+                                 TextAlignment="Center"
+                                 FontSize="9"
+                                 FontWeight="Bold"
+                                 Background="IndianRed"
+                                 VerticalAlignment="Center" />
+                  </Grid>
+                  <StackPanel Grid.Row="0" Grid.RowSpan="4" Grid.Column="3">
+                         <ToggleSwitch IsChecked="{Binding RpcConfigOn}" />
+                         <Border Grid.Column="3"
+                                 BorderThickness="1"
+                                 BorderBrush="Black"
+                                 IsEnabled="{Binding RpcConfigOn}">
+                                   <Grid RowDefinitions="*, Auto">
+                                       <TextBlock Grid.Row="0"
+                                                  Text="Broadcast RPC config:"
+                                                  Margin="5"/>
+                                       <Grid Grid.Row="1"
+                                             RowDefinitions="Auto, Auto, Auto"
+                                             ColumnDefinitions="Auto, Auto"
+                                             Margin="5">
+                                              <Label Grid.Row="0"  Grid.Column="0" 
+                                                     Content="Uri:" 
+                                                     VerticalAlignment="Center" />
+                                              <TextBox Grid.Row="0"  Grid.Column="1"
+                                                       Text="{Binding RpcUri}"  
+                                                       VerticalAlignment="Center" 
+                                                       Margin="10,0"/>
+                                              <Label Grid.Row="1"  Grid.Column="0" 
+                                                     Content="Username:"  
+                                                     VerticalAlignment="Center" />
+                                              <TextBox Grid.Row="1"  Grid.Column="1" 
+                                                       Text="{Binding RpcUser}" 
+                                                       VerticalAlignment="Center" 
+                                                       Margin="10,0" />
+                                              <Label Grid.Row="2"  Grid.Column="0" 
+                                                     Content="Password:"  
+                                                     VerticalAlignment="Center" />
+                                              <TextBox Grid.Row="2"  Grid.Column="1"
+                                                       Text="{Binding RpcPassword}" 
+                                                       Margin="10,0" />
+                                       </Grid>
+                                </Grid>
+                         </Border>
+                  </StackPanel>
+                  <Label Grid.Row="6" Grid.Column="0" 
+                         Margin="5, 20"
+                         Content="Minimalize UTXOs:" 
+                         />
+                  <ToggleSwitch Grid.Row="6" Grid.Column="1" 
+                                IsChecked="{Binding MinimalizeUTXOSpending}"/>
+              </Grid>
+           <StackPanel Grid.Row="2"
+                       Orientation="Horizontal">
+                  <Button Grid.Row="2"
+                          Margin="5"
+                          Content="CREATE TRANSACTION"
+                          Background="GreenYellow"
+                          Command="{Binding SendTransactionCommand}"/>
+                  <Label Content="{Binding LoadingErrorRPC}"
+                         Background="Red"
+                         VerticalAlignment="Center"
+                         IsVisible="{Binding IsError}"/>
+           </StackPanel>
+       </Grid>
+</UserControl>

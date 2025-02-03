@@ -1,0 +1,35 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BTCWallet.Views.WalletProfile.WalletProfileAddressesView"
+             xmlns:vm="using:BTCWallet.ViewModels"
+             xmlns:m="using:BTCWallet.Models"
+             xmlns:walletProfile="clr-namespace:BTCWallet.ViewModels.WalletProfile"
+             x:DataType="walletProfile:WalletProfileAddressesViewModel"
+             Background="LightGray">
+    <Grid RowDefinitions="*, Auto, *"
+          Margin="20">
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Receive addresses:" />
+            <DataGrid Margin="15"
+                      ItemsSource="{Binding ReceiveAddresses}"
+                      MaxHeight="200">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="date"  Binding="{Binding AddressWif} "/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <StackPanel Grid.Row="2">
+            <TextBlock Text="Change addresses:" />
+            <DataGrid Margin="15"
+                      ItemsSource="{Binding ChangeAddresses}"
+                      MaxHeight="200">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="address"  Binding="{Binding AddressWif} "/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</UserControl>

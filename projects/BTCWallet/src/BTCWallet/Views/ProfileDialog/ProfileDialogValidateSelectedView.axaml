@@ -1,0 +1,59 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BTCWallet.Views.ProfileDialog.ProfileDialogValidateSelectedView"
+             xmlns:m="using:BTCWallet.DataModels"
+             xmlns:vm="using:BTCWallet.ViewModels.ProfileDialog"
+             xmlns:profileDialog="clr-namespace:BTCWallet.ViewModels.ProfileDialog"
+             x:DataType="profileDialog:ProfileDialogValidateSelectedViewModel"
+             Background="DarkGray">
+
+    <Grid RowDefinitions="*, Auto, *, Auto"
+          Margin="20">
+        <StackPanel Grid.Row="0">
+            <Label Content="Type password to proceed to the profile:"
+                   HorizontalContentAlignment="Left"
+                   Margin="20"
+                   FontSize="25" />
+        </StackPanel>
+        <Grid Grid.Row="1"
+              ColumnDefinitions="*, 2*, 2*"
+              RowDefinitions="*, *">
+            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal"
+                        Spacing="15">
+                <Label Content="Username:"
+                       FontSize="18"/>
+                <TextBlock Text="{Binding Username}"
+                           FontSize="18"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical"
+                        Spacing="15">
+                <Label Content="Password:"
+                       FontSize="18" />
+                <TextBox Text="{Binding TypedPassword}"
+                         x:Name="PasswordTextBox"
+                         FontSize="15"
+                         PasswordChar="*"
+                         Width=""/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="3"
+              ColumnDefinitions="*, Auto">
+            <StackPanel Grid.Column="1"
+                        Spacing="10"
+                        Orientation="Horizontal">
+                <Button Content="LOG IN"
+                        Background="YellowGreen"
+                        HotKey="Enter"
+                        Command="{Binding LogInCommand}" />
+                <Button Content="BACK"
+                        HotKey="b"
+                        Background="Red"
+                        Command="{Binding BackCommand}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
